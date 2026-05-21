@@ -1,0 +1,120 @@
+{
+  "theme": "LIGHT",
+  "archetype": "Organic & Earthy",
+  "rationale": "For a recipe and meal planning app, food should be the hero. A warm, organic, light theme (Off-white/Bone, Terracotta, Sage) creates an appetizing, welcoming, and trustworthy environment for home cooks while keeping the structured UI required for a SaaS meal planner.",
+  "typography": {
+    "heading_font": "Playfair Display",
+    "body_font": "Manrope",
+    "rationale": "Playfair Display gives an editorial, high-end cookbook feel for recipe titles and primary headings. Manrope provides clean, geometric readability for complex data (nutrition, ingredients, UI controls).",
+    "scales": {
+      "h1": "text-4xl sm:text-5xl tracking-tight leading-none",
+      "h2": "text-2xl sm:text-3xl tracking-tight leading-tight",
+      "h3": "text-xl sm:text-2xl",
+      "h4": "text-lg font-semibold",
+      "body": "text-base leading-relaxed",
+      "small": "text-sm text-muted-foreground",
+      "overline": "text-xs font-bold uppercase tracking-[0.2em] text-[#52796F]"
+    }
+  },
+  "colors": {
+    "background": {
+      "default": "#FAF9F6",
+      "paper": "#FFFFFF",
+      "muted": "#F3F1ED"
+    },
+    "text": {
+      "primary": "#2D2A26",
+      "secondary": "#5C5955",
+      "muted": "#8A8782"
+    },
+    "primary": {
+      "DEFAULT": "#C84B31",
+      "hover": "#A83F29",
+      "foreground": "#FFFFFF"
+    },
+    "secondary": {
+      "DEFAULT": "#52796F",
+      "hover": "#42635B",
+      "foreground": "#FFFFFF"
+    },
+    "border": "#E5E0D8",
+    "status": {
+      "success": "#52796F",
+      "warning": "#E07A5F",
+      "error": "#9B2226"
+    }
+  },
+  "layout_and_spacing": {
+    "spacing_scale": "Use generous padding: p-6 or p-8 for cards. p-12 for page sections.",
+    "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+    "grid_modes": {
+      "library": "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8",
+      "weekly_planner": "grid-cols-1 lg:grid-cols-7 gap-4 (7-day bento style)"
+    },
+    "surface_styles": {
+      "recipe_card": "bg-white rounded-3xl border border-[#E5E0D8] shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 overflow-hidden",
+      "nutrition_widget": "bg-[#F3F1ED] rounded-2xl p-6 border border-[#E5E0D8]/50",
+      "header": "sticky top-0 z-50 backdrop-blur-xl bg-[#FAF9F6]/80 border-b border-[#E5E0D8]"
+    }
+  },
+  "components": {
+    "buttons": "rounded-full px-6 py-2.5 font-medium transition-all active:scale-95",
+    "inputs": "rounded-2xl border-[#E5E0D8] bg-white focus:ring-2 focus:ring-[#52796F]/30 focus:border-[#52796F] px-4 py-3 shadow-sm",
+    "tags": "px-3 py-1 rounded-full text-xs font-semibold bg-[#F3F1ED] text-[#5C5955]",
+    "progress_bar": "h-2 rounded-full bg-[#E5E0D8] overflow-hidden",
+    "progress_indicator": "h-full bg-[#52796F] transition-all duration-500 ease-in-out"
+  },
+  "motion": {
+    "hover": "transition-transform duration-300 ease-out",
+    "page_enter": "animate-in fade-in slide-in-from-bottom-4 duration-500",
+    "list_stagger": "animate-in slide-in-from-bottom-2 duration-300"
+  },
+  "icons": {
+    "library": "lucide-react",
+    "usage": "Use stroke-width 1.5 for a lighter, more elegant feel to match Playfair Display."
+  },
+  "media": {
+    "images": [
+      {
+        "category": "hero_background",
+        "url": "https://static.prod-images.emergentagent.com/jobs/1d7de576-1d6b-46bf-b5e5-319b272feee7/images/40cee2da9ab8aac23e8508a2c38991ee8a08de701f91fab475a2e81278bfb65c.png",
+        "description": "Abstract warm culinary background texture for the home/ingestion page header area."
+      },
+      {
+        "category": "empty_state_ai",
+        "url": "https://static.prod-images.emergentagent.com/jobs/1d7de576-1d6b-46bf-b5e5-319b272feee7/images/ac1585a3d09372ffc172a205f4a402a78d12769b6c9571cfba40068bc6902306.png",
+        "description": "AI cooking illustration to show when the LangGraph agent is extracting the recipe."
+      },
+      {
+        "category": "recipe_placeholder_1",
+        "url": "https://images.unsplash.com/photo-1764480527054-db33eaf227d6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHwzfHxkZWxpY2lvdXMlMjBoZWFsdGh5JTIwbWVhbCUyMHBsYXRlfGVufDB8fHx8MTc3OTM4MzI0NHww&ixlib=rb-4.1.0&q=85",
+        "description": "Breakfast plate with toast, eggs, salad."
+      },
+      {
+        "category": "recipe_placeholder_2",
+        "url": "https://images.pexels.com/photos/10506640/pexels-photo-10506640.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Gourmet dish featuring grilled salmon, rice, greens."
+      },
+      {
+        "category": "recipe_placeholder_3",
+        "url": "https://images.pexels.com/photos/8366621/pexels-photo-8366621.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Fresh vegetables and eggs on a wooden cutting board."
+      },
+      {
+        "category": "recipe_placeholder_4",
+        "url": "https://images.pexels.com/photos/4552045/pexels-photo-4552045.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Red rice and roti bread served with sauces."
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "App must be in French (e.g., 'Ajouter une URL YouTube', 'Planificateur Hebdomadaire').",
+    "Install and use 'lucide-react' for icons.",
+    "Install fonts via Google Fonts in index.html or global CSS (Playfair Display and Manrope).",
+    "Configure Tailwind config with the custom colors provided in this JSON.",
+    "Do NOT use generic card components out of the box. Use the provided surface_styles (rounded-3xl, delicate borders).",
+    "Ensure all interactive elements have data-testid attributes (e.g., data-testid='extract-recipe-btn').",
+    "Use Recharts for the nutrition donut chart, applying the primary/secondary colors.",
+    "Maintain high contrast for accessibility (APCA guidelines) especially on the Terracotta CTAs."
+  ]
+}
