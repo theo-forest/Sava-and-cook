@@ -161,6 +161,12 @@ export default function IngestPage() {
       return;
     }
 
+    const youtubeRegex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)([^&\n?#]+)/;
+    if (!youtubeRegex.test(url.trim())) {
+      setError("URL YouTube invalide. Exemple : https://www.youtube.com/watch?v=...");
+      return;
+    }
+
     setLoading(true);
     try {
       const resp = await axios.post(`${API}/videos/ingest`, { url: url.trim() });
@@ -226,7 +232,7 @@ export default function IngestPage() {
             <div className="flex-1 relative">
               <Link2 size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8A8782]" strokeWidth={1.5} />
               <input
-                type="url"
+                type="text"
                 data-testid="youtube-url-input"
                 value={url}
                 onChange={e => setUrl(e.target.value)}
