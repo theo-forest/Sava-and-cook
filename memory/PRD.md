@@ -32,6 +32,7 @@ Frontend (React) → FastAPI backend → Pipeline 3 agents
 - `GET /api/plans/{week}` — Plan hebdomadaire
 - `POST /api/plans/{week}/slots` — Ajouter une recette au plan
 - `DELETE /api/plans/{week}/slots/{slot_id}` — Retirer un slot
+- `GET /api/plans/{week}/shopping-list` — Liste de courses agrégée (v2 - 2026-06-14)
 - `GET /api/stats` — Statistiques globales
 - `GET /api/health` — Health check
 
@@ -40,6 +41,7 @@ Frontend (React) → FastAPI backend → Pipeline 3 agents
 - **Bibliothèque** (`/recipes`) — Grille recettes avec filtres par tag
 - **Détail recette** (`/recipes/:id`) — Ingrédients, étapes interactives, chart nutrition
 - **Planificateur** (`/planner`) — Grille 7j × 3 repas, navigation semaines
+- **Modal Liste de courses** — Cases à cocher + export PDF jsPDF (v2 - 2026-06-14)
 
 ### Collections MongoDB
 - `videos` — Métadonnées + transcription YouTube (idempotent)

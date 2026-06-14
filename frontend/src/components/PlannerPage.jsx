@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { ChevronLeft, ChevronRight, Plus, X, Flame, Search, Loader2 } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus, X, Flame, Search, Loader2, ShoppingCart } from "lucide-react";
 import axios from "axios";
+import ShoppingListModal from "@/components/ShoppingListModal";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -170,6 +171,7 @@ export default function PlannerPage() {
   const [plan, setPlan] = useState(null);
   const [loading, setLoading] = useState(true);
   const [addModal, setAddModal] = useState(null); // { day, meal }
+  const [showShopping, setShowShopping] = useState(false);
 
   const weekKey = dateToWeekKey(monday);
 
@@ -279,15 +281,25 @@ export default function PlannerPage() {
 
         {/* Stats strip */}
         {mealsPlanned > 0 && (
-          <div className="flex items-center gap-6 bg-white rounded-2xl border border-[#E5E0D8] px-5 py-3 mb-6 w-fit">
-            <div className="flex items-center gap-2 text-sm">
-              <Flame size={16} className="text-[#C84B31]" strokeWidth={1.5} />
-              <span className="text-[#8A8782]">Total semaine :</span>
-              <strong className="text-[#2D2A26]">{totalCalories.toLocaleString("fr")} kcal</strong>
+          <div className="flex flex-wrap items-center gap-4 mb-6">
+            <div className="flex items-center gap-6 bg-white rounded-2xl border border-[#E5E0D8] px-5 py-3">
+              <div className="flex items-center gap-2 text-sm">
+                <Flame size={16} className="text-[#C84B31]" strokeWidth={1.5} />
+                <span className="text-[#8A8782]">Total semaine :</span>
+                <strong className="text-[#2D2A26]">{totalCalories.toLocaleString("fr")} kcal</strong>
+              </div>
+              <div className="text-sm text-[#8A8782]">
+                {mealsPlanned}/21 repas
+              </div>
             </div>
-            <div className="text-sm text-[#8A8782]">
-              {mealsPlanned}/21 repas
-            </div>
+            <button
+              data-testid="open-shopping-list-btn"
+              onClick={() => setShowShopping(true)}
+              className="flex items-center gap-2 bg-[#52796F] hover:bg-[#42635B] text-white rounded-full px-5 py-2.5 text-sm font-semibold transition-all active:scale-95 shadow-sm"
+            >
+              <ShoppingCart size={16} strokeWidth={1.5} />
+              Liste de courses
+            </button>
           </div>
         )}
 
@@ -366,6 +378,14 @@ export default function PlannerPage() {
           slot={addModal}
           onClose={() => setAddModal(null)}
           onAdd={handleAddRecipe}
+        />
+      )}
+
+      {showShopping && (
+        <ShoppingListModal
+          weekKey={weekKey}
+          weekLabel={formatWeek(monday)}
+          onClose={() => setShowShopping(false)}
         />
       )}
     </div>

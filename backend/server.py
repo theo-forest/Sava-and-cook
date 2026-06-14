@@ -235,6 +235,69 @@ async def remove_slot(week: str, slot_id: str):
     return {"message": "Slot supprimé"}
 
 
+# ── Liste de courses ───────────────────────────────────────────────────────
+
+@api_router.get("/plans/{week}/shopping-list")
+async def get_shopping_list(week: str):
+    """Agrège tous les ingrédients des recettes planifiées pour la semaine."""
+    if week == "current":
+        week = _current_week_start()
+
+    plan = await db.weekly_plans.find_one({"week_start": week})
+    if not plan or not plan.get("slots"):
+        return {"week_start": week, "meals": [], "total_ingredients": 0, "total_calories": 0}
+
+    DAYS_FR = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
+    MEALS_FR = {"breakfast": "Petit-déjeuner", "lunch": "Déjeuner", "dinner": "Dîner"}
+    MEAL_ORDER = {"breakfast": 0, "lunch": 1, "dinner": 2}
+
+    # Fetch recipes for each slot (deduplicate by recipe_id)
+    recipe_cache = {}
+    async def get_recipe(recipe_id: str):
+        if recipe_id in recipe_cache:
+            return recipe_cache[recipe_id]
+        try:
+            doc = await db.recipes.find_one({"_id": ObjectId(recipe_id)})
+            recipe_cache[recipe_id] = doc
+            return doc
+        except Exception:
+            return None
+
+    # Sort slots by day then meal
+    sorted_slots = sorted(
+        plan["slots"],
+        key=lambda s: (s["day_of_week"], MEAL_ORDER.get(s["meal_type"], 9))
+    )
+
+    meals = []
+    total_calories = 0
+    for slot in sorted_slots:
+        recipe = await get_recipe(slot["recipe_id"])
+        if not recipe:
+            continue
+
+        ingredients = recipe.get("ingredients", [])
+        calories = recipe.get("nutrition", {}).get("calories", 0)
+        total_calories += calories or 0
+
+        meals.append({
+            "day_label": DAYS_FR[slot["day_of_week"]],
+            "meal_label": MEALS_FR.get(slot["meal_type"], slot["meal_type"]),
+            "recipe_title": recipe.get("title", ""),
+            "servings": recipe.get("servings", 4),
+            "calories": calories,
+            "ingredients": ingredients,
+        })
+
+    return {
+        "week_start": week,
+        "meals": meals,
+        "total_meals": len(meals),
+        "total_ingredients": sum(len(m["ingredients"]) for m in meals),
+        "total_calories": round(total_calories),
+    }
+
+
 # ── Stats ─────────────────────────────────────────────────────────────────
 
 @api_router.get("/stats")
